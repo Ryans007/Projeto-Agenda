@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render, get_list_or_404
 from contact.models import Contact
+from django.http import Http404
 
 def index(request):
   contacts = Contact.objects\
@@ -16,7 +17,10 @@ def index(request):
   )
 
 def contact(request, contact_id):
-  single_contact = Contact.objects.get(pk=contact_id)
+  # single_contact = Contact.objects.filter(pk=contact_id).first()
+  single_contact = get_object_or_404(
+    Contact, pk=contact_id, show=True
+    ) 
   context = {
      "contact": single_contact,
   }
