@@ -6,7 +6,8 @@ def create(request):
   form_action = reverse('contact:create')
   if request.method == 'POST':
     context = {
-      'form': ContactForm(request.POST)
+      'form': ContactForm(request.POST),
+      'form_action': form_action,
     }
   
     return render(
@@ -15,7 +16,8 @@ def create(request):
       context 
     )
   context = {
-    'form': ContactForm()
+    'form': ContactForm(),
+    'form_action': form_action,
   }
   
   return render(
